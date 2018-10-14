@@ -33,12 +33,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   selectPulseNumber(option: number): void {
-    const pulses: Array<Pulse> = times(option - 1, String).map(opt => new Pulse(random(40, 80)));
+    const pulses: Array<Pulse> = times(option - 1, String).map(opt => new Pulse(random(40, 100)));
     this.pulses = [new Pulse(60)].concat(pulses);
     this.selectedOption = option;
   }
 
   startGame(): void {
+    this.selectPulseNumber(this.selectedOption);
     this.startTime = new Date();
     this.showResults = false;
   }

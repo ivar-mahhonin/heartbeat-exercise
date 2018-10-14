@@ -42,7 +42,7 @@ $size: 150px;
   height: $size;
 }
 
-$maxPulse: 80;
+$maxPulse: 100;
 
 @mixin heartbeat-pulse-animations-list {
   @for $i from 40 through $maxPulse {
