@@ -50,9 +50,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   stopGame(): void {
     this.stopTime = new Date();
-    this.seconds = (this.stopTime.getTime() - this.startTime.getTime()) / 1000;
-    this.pulses.forEach(p => p.result = round(this.seconds / (60 / p.speed), 2));
-    console.log(this.pulses);
+    this.seconds = round((this.stopTime.getTime() - this.startTime.getTime()) / 1000, 1);
+    this.pulses.forEach(p => p.result = round(this.seconds / (60 / p.speed), 1));
     this.showResults = true;
   }
 }
