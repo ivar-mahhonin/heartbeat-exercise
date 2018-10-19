@@ -55,9 +55,9 @@
     </div>
   </div>
 
-  <div class="row justify-content-md-center" *ngFor="let pulse of pulses">
-    <div class="col-12">
-      <app-heartbeat [speed]="pulse.speed" *ngIf="start"></app-heartbeat>
+  <div class="row justify-content-md-center" *ngIf="start">
+    <div class="row pulse-row">
+      <app-heartbeat class="pulse-wrapper" [speed]="pulse.speed" *ngFor="let pulse of pulses"></app-heartbeat>
     </div>
   </div>
 </div>
