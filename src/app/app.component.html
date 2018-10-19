@@ -14,32 +14,27 @@
     </div>
   </div>
 
-
   <div class="row" *ngIf="selectedOption">
     <div class="col-12 selector">
-
       <div class="btn-group btn-group-toggle">
         <label class="btn-success" ngbButtonLabel *ngIf="!start">
           <input type="checkbox" ngbButton [value]="true" [(ngModel)]="start" (click)="startGame()"> Start
         </label>
-
         <label class="btn-danger" ngbButtonLabel *ngIf="start">
           <input type="checkbox" ngbButton [value]="false" [(ngModel)]="start" (click)="stopGame()"> Stop
         </label>
       </div>
-
     </div>
   </div>
 
-
   <div class="row" *ngIf="showResults">
     <div class="col-12 scores-table">
+      <h3 class="seconds-result">Seconds passed: {{seconds}} s</h3>
       <table class="table">
         <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Beats per minute (speed)</th>
-          <th scope="col">Seconds passed (time)</th>
           <th scope="col">Beats count (result)</th>
         </tr>
         </thead>
@@ -47,7 +42,6 @@
         <tr *ngFor="let pulse of pulses;let i = index">
           <td>{{i + 1}}</td>
           <td>{{pulse.speed}}</td>
-          <td>{{seconds}} s</td>
           <td>{{pulse.result}} times</td>
         </tr>
         </tbody>
@@ -55,9 +49,12 @@
     </div>
   </div>
 
-  <div class="row justify-content-md-center" *ngIf="start">
-    <div class="row pulse-row">
-      <app-heartbeat class="pulse-wrapper" [speed]="pulse.speed" *ngFor="let pulse of pulses"></app-heartbeat>
+  <div class="row justify-content-md-center">
+    <div class="row pulse-row" *ngIf="start || showResults">
+      <app-heartbeat class="pulse-wrapper"
+                     [pause]="showResults"
+                     [speed]="pulse.speed"
+                     *ngFor="let pulse of pulses"></app-heartbeat>
     </div>
   </div>
 </div>

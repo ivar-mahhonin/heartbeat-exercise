@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class HeartbeatComponent implements OnInit {
   @Input() speed: number;
+  @Input() pause = false;
 
   constructor() {
   }
