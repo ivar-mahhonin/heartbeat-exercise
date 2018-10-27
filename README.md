@@ -1,4 +1,4 @@
-Simple game to develop your parallel thinking. Try to count different heart pulses at the same time.
+Simple game to develop your [parallel thinking](https://en.wikipedia.org/wiki/Parallel_thinking). Try to count different heart pulses at the same time.
 
 Stack: Angular 6 + TypeScript. 
  
