@@ -14,15 +14,32 @@ export class ActionsComponent {
   @Output() stopGameEventEmitter: EventEmitter<void> = new EventEmitter();
   @Output() showResultsTableEventEmitter: EventEmitter<void> = new EventEmitter();
 
+  pendingStart = false;
+  counter = 1;
+
   constructor() {
   }
 
   startGame(): void {
-    this.startGameEventEmitter.emit();
+    this.counter = 1;
+    this.pendingStart = true;
+
+    setTimeout(() => {
+      this.counter = 2;
+      setTimeout(() => {
+        this.counter = 3;
+        setTimeout(() => {
+          this.pendingStart = false;
+          this.startGameEventEmitter.emit();
+          this.start = true;
+        }, 1000);
+      }, 1000);
+    }, 1000);
   }
 
   stopGame(): void {
     this.stopGameEventEmitter.emit();
+    this.start = false;
   }
 
   showResultsTable(): void {

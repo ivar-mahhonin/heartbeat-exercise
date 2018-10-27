@@ -1,13 +1,16 @@
 <div class="col-12 selector">
   <div class="btn-group btn-group-toggle">
-    <label class="btn-success" ngbButtonLabel *ngIf="!start">
-      <input type="checkbox" ngbButton [value]="true" [(ngModel)]="start" (click)="startGame()"> Start
+    <label class="btn-success" ngbButtonLabel *ngIf="!start && !pendingStart">
+      <input type="checkbox" ngbButton (click)="startGame()"> Start
     </label>
     <label class="btn-danger" ngbButtonLabel *ngIf="start">
-      <input type="checkbox" ngbButton [value]="false" [(ngModel)]="start" (click)="stopGame()"> Stop
+      <input type="checkbox" ngbButton (click)="stopGame()"> Stop
     </label>
     <label class="btn-warning" ngbButtonLabel *ngIf="stopTime && !showResults">
       <input type="checkbox" ngbButton (click)="showResultsTable()"> Show results
+    </label>
+    <label class="btn-primary" ngbButtonLabel *ngIf="pendingStart">
+      <input type="checkbox" ngbButton> {{counter}}
     </label>
   </div>
 </div>

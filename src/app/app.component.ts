@@ -34,12 +34,14 @@ export class AppComponent {
   }
 
   public startGame(): void {
+    this.start = true;
     this.selectPulseNumber(this.selectedOption);
     this.startTime = new Date();
     this.showResults = false;
   }
 
   public stopGame(): void {
+    this.start = false;
     this.stopTime = new Date();
     this.seconds = round((this.stopTime.getTime() - this.startTime.getTime()) / 1000, 1);
     this.pulses.forEach(p => p.result = round(this.seconds / (60 / p.speed), 0));
