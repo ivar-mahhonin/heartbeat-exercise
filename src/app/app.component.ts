@@ -26,6 +26,9 @@ export class AppComponent {
   seconds = 0;
   pause = false;
 
+  pendingStart = false;
+  counter = 1;
+
   public selectPulseNumber(option: number): void {
     this.resetState();
     const pulses: Array<Pulse> = times(option - 1, String).map(opt => new Pulse(random(40, 100)));
@@ -33,11 +36,30 @@ export class AppComponent {
     this.selectedOption = option;
   }
 
+  initStartCount(): void {
+    this.counter = 1;
+    this.pendingStart = true;
+    this.showResults = false;
+
+    const intervalId = setInterval(() => this.counter += 1, 1000);
+
+    const callback = () => {
+      clearInterval(intervalId);
+      this.pendingStart = false;
+      this.startGame();
+    };
+
+    setTimeout(callback.bind(this), 3000);
+    console.log(this.start);
+  }
+
   public startGame(): void {
     this.start = true;
+    console.log(this.start);
     this.selectPulseNumber(this.selectedOption);
     this.startTime = new Date();
     this.showResults = false;
+    console.log(this.start);
   }
 
   public stopGame(): void {
@@ -55,7 +77,6 @@ export class AppComponent {
   private resetState(): void {
     this.stopTime = null;
     this.startTime = null;
-    this.start = false;
     this.showResults = false;
     this.pulses = [];
     this.pause = false;

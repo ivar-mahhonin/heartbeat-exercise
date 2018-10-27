@@ -8,14 +8,22 @@
   </div>
 
   <div class="row" *ngIf="selectedOption">
-    <app-actions
-      class="actions-wrapper"
-      [showResults]="showResults"
-      [start]="start"
-      [stopTime]="stopTime"
-      (showResultsTableEventEmitter)="showResultsTable()"
-      (startGameEventEmitter)="startGame()"
-      (stopGameEventEmitter)="stopGame()"></app-actions>
+    <div class="col-12 selector">
+      <ng-container *ngIf="!pendingStart">
+        <div class="btn-group btn-group-toggle">
+          <label class="btn-success" ngbButtonLabel *ngIf="!start">
+            <input type="checkbox" ngbButton (click)="initStartCount()"> Start
+          </label>
+          <label class="btn-danger" ngbButtonLabel *ngIf="start">
+            <input type="checkbox" ngbButton (click)="stopGame()"> Stop
+          </label>
+          <label class="btn-warning" ngbButtonLabel *ngIf="stopTime && !showResults">
+            <input type="checkbox" ngbButton (click)="showResultsTable()"> Show results
+          </label>
+        </div>
+      </ng-container>
+      <h1 *ngIf="pendingStart">{{counter}}</h1>
+    </div>
   </div>
 
   <div class="row" *ngIf="showResults">
@@ -23,7 +31,7 @@
   </div>
 
   <div class="row justify-content-md-center">
-    <div class="row pulse-row" *ngIf="startTime">
+    <div class="row pulse-row" *ngIf="startTime && !pendingStart">
       <app-heartbeat class="pulse-wrapper"
                      [pause]="pause"
                      [speed]="pulse.speed"
