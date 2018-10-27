@@ -1,18 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-heartbeat',
   templateUrl: './heartbeat.component.html',
   styleUrls: ['./heartbeat.component.scss']
 })
-export class HeartbeatComponent implements OnInit {
+export class HeartbeatComponent {
   @Input() speed: number;
   @Input() pause = false;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
 }

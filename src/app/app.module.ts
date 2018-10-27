@@ -4,11 +4,17 @@ import {NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
 import {HeartbeatComponent} from './heartbeat/heartbeat.component';
 import {FormsModule} from '@angular/forms';
+import { ResultsTableComponent } from './results-table/results-table.component';
+import { ActionsComponent } from './actions/actions.component';
+import { OptionsSelectorComponent } from './options-selector/options-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeartbeatComponent],
+    HeartbeatComponent,
+    ResultsTableComponent,
+    ActionsComponent,
+    OptionsSelectorComponent],
   imports: [
     BrowserModule,
     FormsModule,

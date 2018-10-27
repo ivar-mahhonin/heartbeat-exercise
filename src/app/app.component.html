@@ -1,55 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 selector">
-      <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-success" id="dropdownBasic1" ngbDropdownToggle>Select number of pulses
-          {{selectedOption}}
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button class="dropdown-item" *ngFor="let option of options" (click)="selectPulseNumber(option)">{{option}}
-            heart(s)
-          </button>
-        </div>
-      </div>
-    </div>
+    <app-options-selector
+      class="selector-wrapper"
+      [options]="options"
+      [selectedOption]="selectedOption"
+      (selectOptionEventEmitter)="selectPulseNumber($event)"></app-options-selector>
   </div>
 
   <div class="row" *ngIf="selectedOption">
-    <div class="col-12 selector">
-      <div class="btn-group btn-group-toggle">
-        <label class="btn-success" ngbButtonLabel *ngIf="!start">
-          <input type="checkbox" ngbButton [value]="true" [(ngModel)]="start" (click)="startGame()"> Start
-        </label>
-        <label class="btn-danger" ngbButtonLabel *ngIf="start">
-          <input type="checkbox" ngbButton [value]="false" [(ngModel)]="start" (click)="stopGame()"> Stop
-        </label>
-        <label class="btn-warning" ngbButtonLabel *ngIf="stopTime && !showResults">
-          <input type="checkbox" ngbButton (click)="showResultsTable()"> Show results
-        </label>
-      </div>
-    </div>
+    <app-actions
+      class="actions-wrapper"
+      [showResults]="showResults"
+      [start]="start"
+      [stopTime]="stopTime"
+      (showResultsTableEventEmitter)="showResultsTable()"
+      (startGameEventEmitter)="startGame()"
+      (stopGameEventEmitter)="stopGame()"></app-actions>
   </div>
 
   <div class="row" *ngIf="showResults">
-    <div class="col-12 scores-table">
-      <h3 class="seconds-result">Seconds passed: {{seconds}} s</h3>
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Beats per minute (speed)</th>
-          <th scope="col">Beats count (result)</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let pulse of pulses;let i = index">
-          <td>{{i + 1}}</td>
-          <td>{{pulse.speed}}</td>
-          <td>{{pulse.result}} times</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-results-table class="results-row" [pulses]="pulses" [seconds]="seconds"></app-results-table>
   </div>
 
   <div class="row justify-content-md-center">

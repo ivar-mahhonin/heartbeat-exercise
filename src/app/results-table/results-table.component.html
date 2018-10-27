@@ -1,0 +1,19 @@
+<div class="col-12 scores-table">
+  <h3 class="seconds-result">Seconds passed: {{seconds}} s</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Beats per minute (speed)</th>
+      <th scope="col">Beats count (result)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pulse of pulses;let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{pulse.speed}}</td>
+      <td>{{pulse.result}} times</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
