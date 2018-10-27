@@ -23,6 +23,9 @@
         <label class="btn-danger" ngbButtonLabel *ngIf="start">
           <input type="checkbox" ngbButton [value]="false" [(ngModel)]="start" (click)="stopGame()"> Stop
         </label>
+        <label class="btn-warning" ngbButtonLabel *ngIf="stopTime && !showResults">
+          <input type="checkbox" ngbButton (click)="showResultsTable()"> Show results
+        </label>
       </div>
     </div>
   </div>
@@ -50,9 +53,9 @@
   </div>
 
   <div class="row justify-content-md-center">
-    <div class="row pulse-row" *ngIf="start || showResults">
+    <div class="row pulse-row" *ngIf="startTime">
       <app-heartbeat class="pulse-wrapper"
-                     [pause]="showResults"
+                     [pause]="pause"
                      [speed]="pulse.speed"
                      *ngFor="let pulse of pulses"></app-heartbeat>
     </div>

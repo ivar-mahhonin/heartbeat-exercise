@@ -25,6 +25,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   selectedOption;
   showResults = false;
   seconds = 0;
+  pause = false;
 
   ngOnInit() {
   }
@@ -33,10 +34,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   selectPulseNumber(option: number): void {
-    this.startTime = null;
-    this.start = false;
-    this.showResults = false;
-    this.pulses = [];
+    this.resetState();
     const pulses: Array<Pulse> = times(option - 1, String).map(opt => new Pulse(random(40, 100)));
     this.pulses = [new Pulse(60)].concat(pulses);
     this.selectedOption = option;
@@ -52,6 +50,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.stopTime = new Date();
     this.seconds = round((this.stopTime.getTime() - this.startTime.getTime()) / 1000, 1);
     this.pulses.forEach(p => p.result = round(this.seconds / (60 / p.speed), 0));
+    this.pause = true;
+  }
+
+  showResultsTable(): void {
     this.showResults = true;
+  }
+
+  resetState(): void {
+    this.stopTime = null;
+    this.startTime = null;
+    this.start = false;
+    this.showResults = false;
+    this.pulses = [];
+    this.pause = false;
   }
 }
